@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Clock</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="page">
+    <section class="clock-card" aria-label="Digital Clock">
+      <header class="clock-header">
+        <div class="live-badge">
+          <span class="live-dot" aria-hidden="true"></span>
+          <span>LIVE</span>
+        </div>
+        <div class="controls" role="group" aria-label="Clock display options">
+          <button
+            id="format-toggle"
+            class="pill-btn"
+            type="button"
+            aria-pressed="false"
+            title="Switch between 24-hour and 12-hour format"
+          >
+            24H
+          </button>
+          <button
+            id="theme-toggle"
+            class="pill-btn"
+            type="button"
+            aria-pressed="false"
+            title="Switch color theme"
+          >
+            Light
+          </button>
+        </div>
+      </header>
+
+      <div class="date-row">
+        <time id="date-display" class="date-text">--</time>
+        <span id="tz-display" class="tz-badge">--</span>
+      </div>
+
+      <div class="time-stage" aria-live="off">
+        <time id="time-display" class="time-digits">
+          <span id="hours">00</span><span class="colon" aria-hidden="true">:</span><span id="minutes">00</span><span class="colon" aria-hidden="true">:</span><span id="seconds">00</span>
+        </time>
+        <span id="period-badge" class="period-badge is-hidden" aria-hidden="true">AM</span>
+      </div>
+
+      <footer class="clock-footer">
+        <div class="progress-meta">
+          <span class="progress-label">SECOND PROGRESS</span>
+          <span id="second-counter" class="progress-value">00 / 60s</span>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <div id="second-progress" class="progress-fill"></div>
+        </div>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>

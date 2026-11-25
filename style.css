@@ -1,0 +1,320 @@
+:root {
+  --bg-base: #090d16;
+  --bg-glow-1: rgba(56, 189, 248, 0.16);
+  --bg-glow-2: rgba(129, 140, 248, 0.16);
+  --card-bg: rgba(17, 24, 39, 0.78);
+  --card-border: rgba(148, 163, 184, 0.18);
+  --card-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent: #38bdf8;
+  --accent-soft: rgba(56, 189, 248, 0.14);
+  --accent-strong: #818cf8;
+  --pill-bg: rgba(148, 163, 184, 0.12);
+  --pill-hover: rgba(148, 163, 184, 0.22);
+  --track-bg: rgba(148, 163, 184, 0.16);
+  --live-color: #34d399;
+}
+
+body.theme-light {
+  --bg-base: #eef2f7;
+  --bg-glow-1: rgba(14, 165, 233, 0.18);
+  --bg-glow-2: rgba(99, 102, 241, 0.14);
+  --card-bg: rgba(255, 255, 255, 0.88);
+  --card-border: rgba(15, 23, 42, 0.1);
+  --card-shadow: 0 20px 48px rgba(15, 23, 42, 0.1);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent: #0284c7;
+  --accent-soft: rgba(2, 132, 199, 0.1);
+  --accent-strong: #4f46e5;
+  --pill-bg: rgba(15, 23, 42, 0.06);
+  --pill-hover: rgba(15, 23, 42, 0.12);
+  --track-bg: rgba(15, 23, 42, 0.1);
+  --live-color: #10b981;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Noto Sans SC", sans-serif;
+  color: var(--text-primary);
+  background-color: var(--bg-base);
+  background-image:
+    radial-gradient(circle at 18% 20%, var(--bg-glow-1), transparent 45%),
+    radial-gradient(circle at 82% 80%, var(--bg-glow-2), transparent 45%);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.page {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 4vw, 32px);
+}
+
+.clock-card {
+  width: min(100%, 660px);
+  min-width: 0;
+  max-width: 100%;
+  padding: clamp(20px, 4.5vw, 40px);
+  border-radius: clamp(20px, 4vw, 28px);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(18px, 3vw, 26px);
+}
+
+.clock-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+}
+
+.live-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--live-color);
+  box-shadow: 0 0 10px var(--live-color);
+  animation: pulse-dot 1s ease-in-out infinite;
+}
+
+.controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pill-btn {
+  appearance: none;
+  border: 1px solid var(--card-border);
+  background: var(--pill-bg);
+  color: var(--text-primary);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.pill-btn:hover {
+  background: var(--pill-hover);
+}
+
+.pill-btn:active {
+  transform: scale(0.96);
+}
+
+.pill-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.date-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.date-text {
+  font-size: clamp(0.95rem, 2.4vw, 1.125rem);
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+}
+
+.tz-badge {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  letter-spacing: 0.04em;
+}
+
+.time-stage {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  min-width: 0;
+  max-width: 100%;
+  gap: clamp(8px, 2vw, 16px);
+  padding: clamp(16px, 3.5vw, 28px) clamp(10px, 2.5vw, 20px);
+  border-radius: 20px;
+  background: rgba(128, 128, 128, 0.06);
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+}
+
+.time-digits {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  font-size: clamp(2.15rem, 11vw, 5.25rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  background: linear-gradient(135deg, var(--text-primary) 35%, var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.colon {
+  display: inline-block;
+  margin: 0 0.04em;
+  transition: opacity 0.15s ease;
+}
+
+.colon.is-dim {
+  opacity: 0.35;
+}
+
+.period-badge {
+  font-size: clamp(0.8rem, 2.2vw, 1.05rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 8px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  flex-shrink: 0;
+}
+
+.period-badge.is-hidden {
+  display: none;
+}
+
+.clock-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.progress-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.progress-value {
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--track-bg);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+  transition: width 0.25s ease-out;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+}
+
+@media (max-width: 480px) {
+  .clock-card {
+    padding: 18px 16px;
+    gap: 16px;
+  }
+
+  .time-stage {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 8px;
+  }
+
+  .time-digits {
+    font-size: clamp(2rem, 11.5vw, 3.1rem);
+  }
+
+  .date-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+@media (max-height: 500px) {
+  .page {
+    padding: 12px;
+  }
+
+  .clock-card {
+    padding: 16px 24px;
+    gap: 12px;
+  }
+
+  .time-stage {
+    padding: 12px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-dot {
+    animation: none;
+  }
+
+  .progress-fill,
+  .colon,
+  body,
+  .pill-btn {
+    transition: none;
+  }
+}
